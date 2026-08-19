@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Timona Academy — Kế hoạch phục hồi traffic 4 tháng (09–12/2026)</title>
+<style>
+:root{
+  --navy:#0F3F76;
+  --blue:#2483C5;
+  --blue-l:#5BA6DC;
+  --ink:#231F20;
+  --paper:#FFFFFF;
+  --mist:#F4F7FA;
+  --line:#DFE6EE;
+  --up:#12805C;
+  --down:#C0392B;
+  --warn:#B7791F;
+  --muted:#5F6B7A;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color:var(--ink);
+  background:var(--mist);
+  line-height:1.72;
+  font-size:16.5px;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+
+/* ---------- HEADER ---------- */
+header{
+  background:var(--navy);
+  color:#fff;
+  padding:38px 0 0;
+  position:relative;
+  overflow:hidden;
+}
+header::after{
+  content:"";position:absolute;right:-90px;top:-90px;
+  width:300px;height:300px;border-radius:50%;
+  background:radial-gradient(circle,rgba(36,131,197,.38),transparent 68%);
+}
+.eyebrow{
+  font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--blue-l);margin-bottom:10px;
+}
+header h1{
+  font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-weight:700;font-size:clamp(28px,4.2vw,42px);
+  line-height:1.2;max-width:20ch;position:relative;z-index:1;
+}
+.sub{color:#C6D8EA;margin-top:12px;font-size:16px;max-width:60ch;position:relative;z-index:1}
+
+/* headline metric strip */
+.hero-band{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:1px;background:rgba(255,255,255,.16);
+  margin-top:30px;position:relative;z-index:1;
+}
+.hb{background:var(--navy);padding:16px 18px}
+.hb .k{font-family:ui-monospace, "Segoe UI Mono", Consolas, "Courier New", monospace;font-size:26px;font-weight:600;color:#fff;line-height:1.2}
+.hb .l{font-size:13px;color:#A8C4DE;margin-top:4px;letter-spacing:.02em}
+.hb.alert .k{color:#FF9E93}
+.hb.good .k{color:#7FE3BE}
+
+/* ---------- TABS ---------- */
+nav.tabs{
+  background:var(--navy);position:sticky;top:0;z-index:50;
+  border-top:1px solid rgba(255,255,255,.14);
+}
+.tabrow{display:flex;overflow-x:auto;scrollbar-width:none;gap:2px}
+.tabrow::-webkit-scrollbar{display:none}
+.tab{
+  background:none;border:0;cursor:pointer;
+  font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;font-size:15px;font-weight:500;
+  color:#9FBBD6;padding:14px 18px;white-space:nowrap;
+  border-bottom:3px solid transparent;transition:color .18s,border-color .18s;
+}
+.tab:hover{color:#fff}
+.tab[aria-selected="true"]{color:#fff;border-bottom-color:var(--blue-l);font-weight:600}
+.tab:focus-visible{outline:2px solid var(--blue-l);outline-offset:-3px}
+.tab .n{font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;font-size:12.5px;font-weight:600;color:var(--blue-l);margin-right:7px}
+
+/* ---------- PANELS ---------- */
+main{padding:34px 0 70px}
+.panel{display:none;animation:fade .3s ease}
+.panel.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.panel{animation:none}*{transition:none!important}}
+
+h2.sec{
+  font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;font-weight:700;
+  font-size:25px;color:var(--navy);margin:0 0 6px;
+}
+.sec-note{color:var--muted);font-size:15px;margin-bottom:22px;max-width:76ch}
+
+.card{
+  background:var(--paper);border:1px solid var(--line);
+  border-radius:3px;padding:22px 24px;margin-bottom:18px;
+}
+.card > h3{
+  font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;font-size:19.5px;font-weight:600;
+  color:var(--navy);margin-bottom:5px;
+}
+.card > .h3note{color:var(--muted);font-size:14.5px;margin-bottom:16px}
+
+/* verdict box */
+.verdict{
+  background:var(--navy);color:#fff;border-radius:3px;
+  padding:24px 26px;margin-bottom:22px;
+}
+.verdict h3{font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;font-size:21px;font-weight:600;margin-bottom:10px}
+.verdict p{color:#D3E2F0;font-size:16.5px;max-width:72ch}
+.verdict strong{color:#fff}
+
+/* priority lanes */
+.lane{border-left:3px solid var(--line);padding-left:18px;margin-bottom:26px}
+.lane.first{border-left-color:var(--down)}
+.lane.para{border-left-color:var(--blue)}
+.lane.recover{border-left-color:var(--up)}
+.lane.later{border-left-color:var(--muted)}
+.lane.never{border-left-color:#C9D2DC}
+.lane-h{
+  font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;font-size:12.5px;font-weight:700;letter-spacing:.08em;
+  text-transform:uppercase;margin-bottom:4px;
+}
+.lane.first .lane-h{color:var(--down)}
+.lane.para .lane-h{color:var(--blue)}
+.lane.recover .lane-h{color:var(--up)}
+.lane.later .lane-h{color:var(--muted)}
+.lane.never .lane-h{color:#98A5B3}
+.lane-t{font-weight:600;font-size:17px;margin-bottom:3px}
+.lane-w{color:var(--muted);font-size:14.5px;margin-bottom:12px}
+
+ul.ticks{list-style:none}
+ul.ticks li{
+  padding:10px 0 10px 26px;position:relative;
+  border-bottom:1px dashed var(--line);font-size:15.5px;line-height:1.65;
+}
+ul.ticks li:last-child{border-bottom:0}
+ul.ticks li::before{
+  content:"";position:absolute;left:4px;top:19px;
+  width:7px;height:7px;border-radius:50%;background:var(--blue);
+}
+ul.ticks li b{color:var(--navy)}
+.who{
+  font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;font-size:12px;
+  color:var(--muted);border:1px solid var(--line);
+  padding:1px 6px;border-radius:2px;margin-left:7px;white-space:nowrap;
+}
+
+/* tables */
+table{width:100%;border-collapse:collapse;font-size:15px;margin:6px 0 4px}
+th{
+  text-align:left;font-weight:600;color:var(--navy);
+  border-bottom:2px solid var(--navy);padding:11px 11px;font-size:15.5px;
+  letter-spacing:.01em;
+}
+td{padding:11px 11px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.6}
+tbody tr:hover{background:var(--mist)}
+td.num,th.num{text-align:right;font-family:ui-monospace, "Segoe UI Mono", Consolas, "Courier New", monospace}
+.dn{color:var(--down);font-weight:600}
+.up{color:var(--up);font-weight:600}
+.wn{color:var(--warn);font-weight:600}
+
+/* timeline */
+.tl{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);margin:4px 0 22px}
+.tl-c{background:var(--paper);padding:16px 15px}
+.tl-c .m{
+  font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;font-size:12.5px;font-weight:700;
+  letter-spacing:.08em;color:var(--blue);margin-bottom:6px;
+}
+(.tl-c .t{font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;font-size:17.5px;font-weight:600;color:var(--navy);margin-bottom:6px;line-height:1.28}
+.tl-c .d{font-size:14.5px;color:var(--muted);line-height:1.62}
+.tl-c.peak{background:#EAF3FB}
+.tl-c.peak .t{color:var(--navy)}
+.peak-tag{
+  display:inline-block;font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;font-size:11px;font-weight:700;
+  letter-spacing:.06em;background:var(--blue);color:#fff;padding:2px 6px;
+  border-radius:2px;margin-top:8px;
+}
+
+/* callout */
+.note{
+  border-left:3px solid var(--warn);background:#FDF8EE;
+  padding:16px 20px;margin:18px 0;font-size:15.5px;line-height:1.7;
+}
+.note.bad{border-left-color:var(--down);background:#FCF0EE}
+.note.ok{border-left-color:var(--up);background:#EDF7F3}
+.note b{color:var(--navy)}
+.note .lbl{
+  font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;font-size:12px;font-weight:700;letter-spacing:.08em;
+  text-transform:uppercase;display:block;margin-bottom:5px;color:var(--warn);
+}
+.note.bad .lbl{color:var(--down)}
+.note.ok .lbl{color:var(--up)}
+
+/* decision */
+.dec{border:1px solid var(--line);border-left:3px solid var(--navy);background:var(--paper);padding:16px 20px;margin-bottom:12px}
+.dec-top{display:flex;justify-content:space-between;gap:14px;align-items:baseline;flex-wrap:wrap;margin-bottom:6px}
+.dec-t{font-weight:600;color:var(--navy);font-size:16.5px}
+.dec-d{font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;font-size:12.5px;font-weight:700;color:var(--down);white-space:nowrap}
+.dec-b{font-size:15.5px;color:#3C4652;line-height:1.68}
+.dec-blk{font-size:14.5px;line-height:1.65;color:var(--muted);margin-top:7px;padding-top:7px;border-top:1px dashed var(--line)}
+
+/* metric grid */
+.mg{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--line);margin:4px 0 6px}
+.mg-c{background:var(--paper);padding:14px 15px}
+.mg-c .l{font-size:13px;color:var(--muted);margin-bottom:5px;line-height:1.4}
+.mg-c .v{font-family:ui-monospace, "Segoe UI Mono", Consolas, "Courier New", monospace;font-size:21px;font-weight:600;color:var(--navy)}
+.mg-c .v.dn{color:var(--down)}
+.mg-c .v.up{color:var(--up)}
+
+.split{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:760px){
+  .split,.tl{grid-template-columns:1fr}
+  .hero-band{grid-template-columns:repeat(2,1fr)}
+  table{font-size:12.5px}
+  th,td{padding:7px 6px}
+}
+
+footer{
+  border-top:1px solid var(--line);padding:22px 0 34px;
+  color:var(--muted);font-size:13.5px;line-height:1.7;background:var(--paper);
+}
+footer b{color:var(--navy)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="eyebrow">Timona Academy · Báo cáo SEO</div>
+    <h1>Kế hoạch phục hồi traffic 4 tháng</h1>
+    <p class="sub">Tháng 9 đến tháng 12 năm 2026 · Chẩn đoán, việc cần làm, và các quyết định cần anh duyệt. Số liệu lấy từ Google Search Console đến ngày 14/08/2026.</p>
+    <div class="hero-band">
+      <div class="hb alert"><div class="k">~2.700</div><div class="l">Lượt truy cập tháng 8/2026 (GA4)</div></div>
+      <div class="hb good"><div class="k">7.000</div><div class="l">Mục tiêu tháng 12 — đạt được, không cần ngân sách</div></div>
+      <div class="hb"><div class="k">709</div><div class="l">Lượt từ mạng xã hội/tháng — đang tăng 45–79%</div></div>
+      <div class="hb good"><div class="k">260–370</div><div class="l">Mục tiêu lượt vào khoá học/tháng</div></div>
+    </div>
+  </div>
+</header>
+
+<nav class="tabs">
+  <div class="wrap">
+    <div class="tabrow" role="tablist">
+      <button class="tab" role="tab" aria-selected="true" data-p="p1"><span class="n">01</span>Việc cần làm</button>
+      <button class="tab" role="tab" aria-selected="false" data-p="p2"><span class="n">02</span>Vì sao tụt</button>
+      <button class="tab" role="tab" aria-selected="false" data-p="p3"><span class="n">03</span>Tháng 9</button>
+      <button class="tab" role="tab" aria-selected="false" data-p="p4"><span class="n">04</span>Tháng 10–11</button>
+      <button class="tab" role="tab" aria-selected="false" data-p="p5"><span class="n">05</span>Tháng 12</button>
+      <button class="tab" role="tab" aria-selected="false" data-p="p6"><span class="n">06</span>Mục tiêu</button>
+      <button class="tab" role="tab" aria-selected="false" data-p="p7"><span class="n">07</span>Anh Hiếu duyệt</button>
+    </div>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<!-- ============ TAB 1 ============ -->
+<section class="panel on" id="p1" role="tabpanel">
+  <div class="verdict">
+    <h3>Tóm tắt</h3>
+    <p><strong>Chuyện gì đã xảy ra:</strong> traffic tụt 81% trong 16 tháng. Không phải một sự cố, mà hai việc cộng lại — phần lớn traffic trước nay đến từ bài hướng nghiệp và pháp lý chứ không phải nội dung thẩm mỹ, và suốt 18 tháng site gần như không ra bài mới nên không có gì thay thế khi Google siết lại.<br><br>
+    <strong>Kế hoạch làm gì:</strong> lấy lại traffic từ những bài từng mạnh nay lỗi thời, đẩy 190 từ khoá học nghề đang sát trang 1, nối các bài có traffic về trang khoá học, và <strong>đẩy mạnh mạng xã hội</strong> — kênh đang tăng 45–79% mỗi tháng.<br><br>
+    <strong>Cam kết cuối năm:</strong> <strong>7.000 lượt truy cập tháng 12</strong>, trong đó <strong>260–370 lượt vào trang khoá học</strong> — nhiều hơn cả lúc traffic đỉnh tháng 5/2025. Không cần thêm ngân sách.</p>
+  </div>
+
+  <h2 class="sec">Bốn tháng, bốn nhiệm vụ</h2>
+  <p class="sec-note">Thứ tự này được xếp theo mùa vụ thật của ngành, không xếp theo lịch cho tiện.</p>
+
+  <div class="tl">
+    <div class="tl-c">
+      <div class="m">THÁNG 9</div>
+      <div class="t">Mở đường</div>
+      <div class="d">Dựng mốc đo, gỡ hết chốt chặn kỹ thuật, dọn từ khoá lên sai trang. Chưa kỳ vọng traffic tăng.</div>
+    </div>
+    <div class="tl-c peak">
+      <div class="m">THÁNG 10</div>
+      <div class="t">Tăng tốc</div>
+      <div class="d">Chiến dịch 190 từ khoá học nghề. Làm xong tháng 10 mới kịp ra kết quả đúng đỉnh tháng 11.</div>
+      <span class="peak-tag">CỬA SỔ VÀNG</span>
+    </div>
+    <div class="tl-c peak">
+      <div class="m">THÁNG 11</div>
+      <div class="t">Thu hoạch</div>
+      <div class="d">Tháng nhu cầu học nghề cao nhất năm. Không làm gì gây rủi ro thứ hạng.</div>
+      <span class="peak-tag">ĐỈNH MÙA 16,3%</span>
+    </div>
+    <div class="tl-c">
+      <div class="m">THÁNG 12</div>
+      <div class="t">Củng cố</div>
+      <div class="d">Gộp bài trùng, nối trục thương mại, mở kênh AI, chuẩn bị 2027.</div>
+    </div>
+  </div>
+
+  <h2 class="sec" style="margin-top:34px">Việc cần làm, xếp theo thứ tự</h2>
+
+  <div class="lane first">
+    <div class="lane-h">Làm trước — chặn đường</div>
+    <div class="lane-t">Chưa xong bốn việc này thì mọi việc sau đều lãng phí công</div>
+    <div class="lane-w">Hạn: tuần đầu tháng 9</div>
+    <ul class="ticks">
+      <li><b>Gắn mã theo dõi nguồn cho mọi link và biểu mẫu.</b> Tháng 8 có 39 học viên đăng ký nhưng không truy được ai đến từ Google. Không có số này thì không chứng minh được SEO mang lại bao nhiêu học viên. <span class="who">Linh + dev</span></li>
+      <li><b>Kiểm kê toàn bộ 628 đường dẫn</b> — phân loại giữ, gộp, hay chuyển hướng. Mọi việc nội dung phụ thuộc bước này. <span class="who">Linh</span></li>
+      <li><b>Dựng mốc thứ hạng gốc cho 448 từ khoá đang trống.</b> Không có mốc thì cuối kỳ không chứng minh được tiến độ. <span class="who">Linh</span></li>
+      <li><b>Xử lý 231 từ khoá đang lên sai trang</b> — nhiều bài của mình đang tranh nhau cùng một từ khoá. Phải xong trước 25/09 vì chiến dịch tháng 10 phụ thuộc trực tiếp. <span class="who">Linh</span></li>
+    </ul>
+  </div>
+
+  <div class="lane recover">
+    <div class="lane-h">Lấy lại traffic đã mất — nguồn nhanh nhất</div>
+    <div class="lane-t">Traffic này lấy lại được, không phải xây mới</div>
+    <div class="lane-w">Bắt đầu tuần 2 tháng 9 · đây là phần đóng góp chính vào mục tiêu lượt truy cập</div>
+    <ul class="ticks">
+      <li><b>Sửa gấp thứ hạng từ khoá thương hiệu.</b> Truy vấn "timona academy" đã rơi từ <b>hạng 1,4 xuống 5,1</b>; "học viện timona" biến mất khỏi kết quả. Đây là tên riêng của mình, không ai cạnh tranh được — tụt hạng ở đây là bất thường và sửa được nhanh. <span class="who">ưu tiên số 1</span></li>
+      <li><b>Cập nhật 10 bài từng mạnh nay mất sạch.</b> Tổng khoảng <b>131 lượt bấm mỗi tháng</b> đã bốc hơi. Trang vẫn hoạt động bình thường, nguyên nhân là nội dung lỗi thời: bài có năm cũ trong tiêu đề, nhóm mã ngành và thuế spa theo quy định đã thay đổi.</li>
+      <li><b>Đẩy nhóm hiển thị nhiều nhưng ít người bấm.</b> Ví dụ "dấu hiệu phun môi thành công" — 1.200 lượt hiển thị mỗi tháng, đang hạng 6,5, chỉ 11 lượt bấm. Đúng chuyên môn, chỉ cần lên top 3 và sửa lại tiêu đề.</li>
+      <li><b>Khai thác 13 bài thần số học.</b> Hiện có 0 liên kết trong thân bài về khoá học mà vẫn ra học viên — cấy liên kết và mở rộng phần nghề thẩm mỹ.</li>
+    </ul>
+  </div>
+
+  <div class="lane para">
+    <div class="lane-h">Chạy song song — không chờ nhau</div>
+    <div class="lane-t">Bắt đầu ngay từ tuần 1 tháng 9</div>
+    <div class="lane-w">Ba nhóm việc độc lập, làm cùng lúc</div>
+    <ul class="ticks">
+      <li><b>Kỹ thuật:</b> gỡ bớt 71 khung video YouTube trên trang chủ còn tối đa 5, bật tải chậm cho 96 ảnh, sửa dữ liệu có cấu trúc trang khoá học, mở chặn cho các công cụ AI, nâng phiên bản máy chủ. <span class="who">dev</span></li>
+      <li><b>Nội dung nhanh:</b> viết lại tiêu đề và mô tả cho 30 truy vấn đang hiển thị nhiều nhưng ít người bấm. <span class="who">Linh</span></li>
+      <li><b>Dữ liệu:</b> sửa 13 từ khoá trỏ về trang lỗi, chuyển hướng trang khoá filler cũ để thu hồi uy tín liên kết. <span class="who">Linh</span></li>
+      <li><b>Mạng xã hội — đòn bẩy lớn nhất của cả kế hoạch.</b> Kênh này tự tăng từ 166 lên 709 phiên trong 3 tháng mà chưa hề được đầu tư. Đẩy lên 2.200–2.500 phiên đóng góp nhiều hơn toàn bộ việc viết thêm bài gộp lại. <span class="who">Linh + marketing</span></li>
+      <li><b>Nền tin cậy:</b> dựng trang tác giả có thông tin chuyên môn thật, bổ sung nguồn tham khảo cho các bài mẹ và bé. <span class="who">Linh</span></li>
+    </ul>
+  </div>
+
+  <div class="lane later">
+    <div class="lane-h">Làm sau — phụ thuộc việc trên</div>
+    <div class="lane-t">Từ tháng 10 trở đi</div>
+    <ul class="ticks">
+      <li><b>Chiến dịch 190 từ khoá học nghề trang 2</b> — chờ xử lý xong từ khoá lên sai trang</li>
+      <li><b>Nối trục thương mại:</b> mỗi bài có traffic phải có ít nhất một liên kết trong thân bài dẫn về khoá học liên quan</li>
+      <li><b>Sản xuất lại nội dung lõi:</b> 8–10 bài mỗi tháng, chỉ nối mi và phun xăm — hai nhóm nhu cầu lớn nhất</li>
+      <li><b>Mở kênh AI</b> — chờ gỡ chặn kỹ thuật xong</li>
+    </ul>
+  </div>
+
+  <div class="lane never">
+    <div class="lane-h">Không làm trong 4 tháng này</div>
+    <div class="lane-t">Cắt để dồn lực, hoãn sang 2027</div>
+    <ul class="ticks">
+      <li>Chuyển website sang nền tảng mới — quá rủi ro để làm trong quý bán hàng</li>
+      <li>Mở thêm cụm chủ đề mẹ và bé (giai đoạn 2, 3, 4)</li>
+      <li>Viết thêm bài hướng nghiệp chung không liên quan nghề thẩm mỹ</li>
+      <li>Sửa hàng loạt hàng trăm bài trong một tháng — tháng 10/2025 đã sửa 215 bài, hai tháng sau traffic sụt 40%</li>
+      <li><b>Bất kỳ thay đổi lớn nào trong tháng 11</b> — đó là tháng thu hoạch</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ TAB 2 ============ -->
+<section class="panel" id="p2" role="tabpanel">
+  <h2 class="sec">Vì sao traffic tụt</h2>
+  <p class="sec-note">Bốn nguyên nhân, xếp theo mức độ ảnh hưởng. Tất cả đều lấy từ số liệu Google Search Console, không phải phỏng đoán.</p>
+
+  <div class="card">
+    <h3>1. Bệnh đã đổi từ tháng 2/2026, cách chữa cần đổi theo</h3>
+    <p class="h3note">Đây là điểm quan trọng nhất của cả báo cáo.</p>
+    <table>
+      <thead><tr><th>Giai đoạn</th><th class="num">Lượt hiển thị/ngày</th><th class="num">Thứ hạng TB</th><th class="num">Tỷ lệ bấm</th></tr></thead>
+      <tbody>
+        <tr><td>04/2025 → 01/2026</td><td class="num">9.369 → 10.346 <span class="up">tăng</span></td><td class="num">16,6 → 7,5 <span class="up">tốt lên</span></td><td class="num">3,39% → 1,09% <span class="dn">sụp</span></td></tr>
+        <tr><td>02/2026 → 08/2026</td><td class="num">10.346 → 4.251 <span class="dn">−59%</span></td><td class="num">7,5 → 10,5 <span class="dn">xấu đi</span></td><td class="num">1,09% → 1,43% <span class="up">hồi nhẹ</span></td></tr>
+      </tbody>
+    </table>
+    <div class="note bad">
+      <span class="lbl">Đọc bảng này thế nào</span>
+      Giai đoạn đầu là <b>mất lượt bấm</b>: vẫn hiện ra nhiều, thứ hạng còn tốt hơn, nhưng người dùng đọc câu trả lời ngay trên Google rồi thôi. Giai đoạn sau là <b>mất lượt hiển thị</b>: Google giảm dần số truy vấn cho site mình tham gia. Đây là hai bệnh khác nhau — và tiếp tục tối ưu tiêu đề, mô tả sẽ không cứu được bệnh thứ hai.
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>2. Site lệch trục chủ đề</h3>
+    <p class="h3note">So sánh trung bình mỗi tháng, hè 2025 với hè 2026.</p>
+    <table>
+      <thead><tr><th>Nhóm chủ đề</th><th class="num">Bấm 2025</th><th class="num">Bấm 2026</th><th class="num">Biến động</th><th class="num">% hiển thị nay</th></tr></thead>
+      <tbody>
+        <tr><td>Thẩm mỹ &amp; spa — chuyên môn lõi</td><td class="num">426</td><td class="num">86</td><td class="num dn">−80%</td><td class="num">30,0%</td></tr>
+        <tr><td>Thần số học</td><td class="num">19</td><td class="num">73</td><td class="num up">+284%</td><td class="num wn">24,7%</td></tr>
+        <tr><td>Hướng nghiệp chung</td><td class="num">371</td><td class="num">96</td><td class="num dn">−74%</td><td class="num">17,1%</td></tr>
+        <tr><td>Học nghề — ra học viên</td><td class="num">217</td><td class="num">72</td><td class="num dn">−67%</td><td class="num">11,0%</td></tr>
+        <tr><td>Pháp lý, kinh doanh spa</td><td class="num">217</td><td class="num">8</td><td class="num dn">−96%</td><td class="num">0,7%</td></tr>
+        <tr><td>Mẹ &amp; bé</td><td class="num">75</td><td class="num">22</td><td class="num dn">−71%</td><td class="num">3,4%</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:14px;font-size:15.5px">Chín trang mang traffic nhiều nhất 16 tháng qua đều <b>không phải nội dung thẩm mỹ</b>: thuế dịch vụ spa, nghề dễ thất nghiệp, nghề không cần tiếng Anh, mã ngành chăm sóc da, mẫu hợp đồng. Bài đứng thứ hai toàn site xếp hạng bằng các mục về ngành sư phạm, tài chính ngân hàng, nghiên cứu lịch sử.</p>
+    <div class="note">
+      <span class="lbl">Hệ quả</span>
+      Toàn bộ nền móng traffic được xây trên nội dung ngoài chuyên môn. Khi Google siết đánh giá độ liên quan chủ đề, nền đó sụp — và <b>chỉ 3,0% lượt bấm đi vào trang khoá học</b>, nên traffic mất đi cũng gần như không mang theo học viên.
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>3. Nhịp xuất bản đã dừng suốt 18 tháng</h3>
+    <div class="mg">
+      <div class="mg-c"><div class="l">Bài đăng năm 2024</div><div class="v">425</div></div>
+      <div class="mg-c"><div class="l">Bài đăng năm 2025</div><div class="v dn">49</div></div>
+      <div class="mg-c"><div class="l">Tháng 1–6 năm 2026</div><div class="v dn">3</div></div>
+      <div class="mg-c"><div class="l">Tháng 7–8 năm 2026</div><div class="v up">35</div></div>
+    </div>
+    <p style="margin-top:12px;font-size:15.5px">Traffic hiện tại đang sống bằng 425 bài của năm 2024 — nội dung ngày càng cũ, đối thủ vượt lên từng quý. Việc đẩy bài mới chỉ thực sự bắt đầu từ tháng 7/2026, và 35 bài trong 6 tuần chưa đủ thời gian để có thứ hạng.</p>
+  </div>
+
+  <div class="card">
+    <h3>4. Mỗi đợt Google cập nhật đều đánh thêm một nấc</h3>
+    <table>
+      <thead><tr><th>Đợt cập nhật</th><th>Thời gian</th><th>Diễn biến tại Timona</th></tr></thead>
+      <tbody>
+        <tr><td>Cập nhật lõi tháng 12/2025</td><td>11–24/12/2025</td><td>3.828 lượt bấm → còn 2.110 vào tháng 2 <span class="dn">(−45%)</span></td></tr>
+        <tr><td>Cập nhật lõi tháng 3/2026</td><td>27/03–08/04/2026</td><td>Thứ hạng 7,5 → 10,9; hiển thị giảm 26% trong một tuần</td></tr>
+        <tr><td>Cập nhật lõi tháng 5/2026</td><td>21/05–02/06/2026</td><td>Lượt hiển thị chạm đáy toàn kỳ</td></tr>
+      </tbody>
+    </table>
+    <div class="note">
+      <span class="lbl">Cần lưu ý cho quý 4</span>
+      Google chạy cập nhật lõi theo chu kỳ 3–4 tháng, và tháng 8–9 lịch sử là cửa sổ biến động mạnh nhất năm. <b>Nhiều khả năng có thêm một đợt nữa trong quý này.</b> Kế hoạch đã tính đến việc không làm thay đổi lớn trong tháng 11.
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Về mặt kỹ thuật</h3>
+    <div class="split">
+      <div>
+        <div class="note ok">
+          <span class="lbl">Tin tốt — đã kiểm chứng</span>
+          Nghi vấn tường lửa chặn Google là <b>báo động giả</b>. Kiểm tra trực tiếp ngày 19/08: Google vẫn đọc được đầy đủ nội dung, trang lỗi hoạt động đúng. Vấn đề này có thể gạch khỏi danh sách.
+        </div>
+      </div>
+      <div>
+        <div class="note bad">
+          <span class="lbl">Vấn đề nặng nhất</span>
+          Trang chủ có <b>71 khung video YouTube</b> và 96 ảnh, dung lượng 405 KB. Bản cập nhật tháng 3/2026 của Google chấm điểm tốc độ theo cách gộp — trượt một tiêu chí là bị cộng dồn bất lợi. Máy chủ còn chạy phiên bản đã hết hỗ trợ bảo mật từ 2022.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TAB 3 ============ -->
+<section class="panel" id="p3" role="tabpanel">
+  <h2 class="sec">Tháng 9 — Mở đường</h2>
+  <p class="sec-note">Mục tiêu tháng: dừng đà giảm, dựng xong mốc đo, gỡ hết chốt chặn kỹ thuật. Chưa kỳ vọng traffic tăng.</p>
+
+  <div class="card">
+    <h3>Tuần 1 — bốn việc chặn đường</h3>
+    <table>
+      <thead><tr><th>Việc</th><th>Người làm</th><th>Kết quả bàn giao</th></tr></thead>
+      <tbody>
+        <tr><td><b>Gắn mã theo dõi nguồn</b> cho mọi link mạng xã hội và mọi biểu mẫu đăng ký</td><td>Linh + dev</td><td>Biết mỗi học viên đăng ký đến từ kênh nào</td></tr>
+        <tr><td><b>Kiểm kê 628 đường dẫn</b>, phân loại giữ / gộp / chuyển hướng</td><td>Linh</td><td>Bảng kiểm kê đầy đủ</td></tr>
+        <tr><td><b>Dựng mốc thứ hạng gốc</b> cho 448 từ khoá đang trống</td><td>Linh</td><td>Bảng từ khoá đủ mốc so sánh</td></tr>
+        <tr><td><b>Đo tốc độ trang thật</b> trên 10 trang mẫu</td><td>Linh</td><td>Số gốc để đối chiếu sau khi sửa</td></tr>
+      </tbody>
+    </table>
+    <div class="note bad">
+      <span class="lbl">Việc gấp nhất</span>
+      Gắn mã theo dõi nguồn. Tháng 8 có <b>39 học viên đăng ký nhưng không truy được ai đến từ Google</b>. Mỗi ngày chậm là một ngày mất dữ liệu không lấy lại được — và đây chính là con số để chứng minh SEO mang lại bao nhiêu học viên.
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Chạy song song cả tháng — nhóm kỹ thuật</h3>
+    <table>
+      <thead><tr><th>Việc</th><th>Mức</th><th>Vì sao</th></tr></thead>
+      <tbody>
+        <tr><td>Gỡ khung video YouTube trang chủ: 71 xuống tối đa 5</td><td class="dn">Cao</td><td>Thay bằng ảnh, chỉ tải video khi người dùng bấm</td></tr>
+        <tr><td>Bật tải chậm toàn bộ ảnh trang chủ</td><td class="dn">Cao</td><td>Hiện 96 ảnh, chỉ 39 ảnh có tải chậm</td></tr>
+        <tr><td>Sửa dữ liệu có cấu trúc trang khoá học</td><td class="dn">Cao</td><td>Đang khai báo sai loại, mất cơ hội hiển thị nổi bật</td></tr>
+        <tr><td>Bổ sung kích thước cho 20 ảnh đang thiếu</td><td class="wn">Vừa</td><td>Giảm hiện tượng trang nhảy khi tải</td></tr>
+        <tr><td>Mở chặn cho các công cụ AI</td><td class="wn">Vừa</td><td>ChatGPT, Perplexity và Claude đang bị chặn ở tầng máy chủ</td></tr>
+        <tr><td>Nâng phiên bản máy chủ</td><td class="wn">Vừa</td><td>Bắt buộc thử trên bản sao trước. Rủi ro cao thì hoãn sang 2027</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Chạy song song cả tháng — nhóm nội dung</h3>
+    <ul class="ticks">
+      <li><b>Viết lại tiêu đề và mô tả cho 30 truy vấn</b> đang xếp hạng 4–10 nhưng ít người bấm. Ví dụ: một truy vấn đang đứng <b>hạng 1,6 với 1.116 lượt hiển thị mỗi tháng nhưng chỉ 1 lượt bấm</b>.</li>
+      <li><b>Xử lý 231 từ khoá lên sai trang</b> — chọn một trang chuẩn cho mỗi cụm, phần còn lại gộp hoặc chuyển hướng. <b>Phải xong trước 25/09.</b></li>
+      <li><b>Sửa 13 từ khoá trỏ về trang lỗi</b> và chuyển hướng trang khoá filler cũ (từng có 135 lượt bấm) về trang khoá học chính.</li>
+      <li><b>Dựng trang tác giả</b> có thông tin chuyên môn thật — hiện chỉ ghi tên, không có giới thiệu năng lực.</li>
+      <li><b>Bổ sung nguồn tham khảo</b> cho toàn bộ bài mẹ và bé đã đăng. Kiểm tra cho thấy đang thiếu, đây là điểm yếu nặng với nội dung liên quan sức khoẻ.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>Chốt tháng 9</h3>
+    <div class="mg">
+      <div class="mg-c"><div class="l">Lượt bấm mỗi ngày</div><div class="v">≥ 60</div></div>
+      <div class="mg-c"><div class="l">Dung lượng trang chủ</div><div class="v">&lt; 200 KB</div></div>
+      <div class="mg-c"><div class="l">Từ khoá lên sai trang</div><div class="v">231 → &lt; 50</div></div>
+      <div class="mg-c"><div class="l">Đăng ký có nguồn</div><div class="v up">100%</div></div>
+    </div>
+    <p style="margin-top:12px;font-size:14.5px;color:var(--muted)">Ngưỡng lượt bấm là <b>ngừng giảm</b>, không phải tăng. Việc làm trong tháng 9 cần 4–8 tuần mới phản ánh vào thứ hạng.</p>
+  </div>
+</section>
+
+<!-- ============ TAB 4 ============ -->
+<section class="panel" id="p4" role="tabpanel">
+  <h2 class="sec">Tháng 10 và 11 — Tăng tốc rồi thu hoạch</h2>
+  <p class="sec-note">Hai tháng quan trọng nhất của kế hoạch. Thứ tự này được xếp theo mùa vụ thật, không xếp cho tiện.</p>
+
+  <div class="card">
+    <h3>Vì sao dồn lực vào đúng hai tháng này</h3>
+    <p class="h3note">Tỷ lệ nhu cầu học nghề trong tổng lượt hiển thị, theo dữ liệu 16 tháng.</p>
+    <table>
+      <thead><tr><th>Tháng</th><th class="num">8</th><th class="num">9</th><th class="num">10</th><th class="num">11</th><th class="num">12</th><th class="num">1</th><th class="num">2</th></tr></thead>
+      <tbody><tr><td>Tỷ lệ nhu cầu</td><td class="num">11,2%</td><td class="num">12,0%</td><td class="num">14,5%</td><td class="num up">16,3%</td><td class="num">9,4%</td><td class="num">7,3%</td><td class="num dn">4,7%</td></tr></tbody>
+    </table>
+    <div class="note">
+      <span class="lbl">Điều này quyết định cả kế hoạch</span>
+      Cửa sổ vàng của quý cuối năm là <b>tháng 10 và 11</b>. Từ tháng 12 nhu cầu tự rơi và chạm đáy tháng 2. Vì việc tối ưu cần 4–8 tuần mới ra kết quả, <b>mọi thứ cần ra số trong năm 2026 phải xong chậm nhất giữa tháng 10</b>.
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Tháng 10 — chiến dịch 190 từ khoá học nghề</h3>
+    <p class="h3note">Đây là nguồn tăng trưởng khả thi nhất: đúng chuyên môn, ra học viên, và chỉ cách trang 1 vài bậc.</p>
+    <table>
+      <thead><tr><th>Thứ hạng hiện tại</th><th class="num">Số từ khoá</th><th>Ghi chú</th></tr></thead>
+      <tbody>
+        <tr><td>Hạng 1–3</td><td class="num">110</td><td>Giữ vững</td></tr>
+        <tr><td>Hạng 4–10</td><td class="num">179</td><td>Đẩy lên top 3</td></tr>
+        <tr><td><b>Hạng 11–20 (trang 2)</b></td><td class="num"><b>190</b></td><td class="up"><b>Mục tiêu chính của chiến dịch</b></td></tr>
+        <tr><td>Hạng 21–50</td><td class="num">98</td><td>Đợt sau</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:14px;font-size:15.5px"><b>Thứ tự xử lý theo quy mô nhu cầu</b>, không làm dàn đều: nối mi (45.570 lượt tìm/tháng) → phun xăm (16.240) → học spa tổng quát (15.390) → gội đầu dưỡng sinh (12.080) → massage và chăm sóc da (9.310).</p>
+    <p style="margin-top:10px;font-size:15.5px"><b>Nhịp:</b> 30 từ khoá mỗi tuần. Bốn tuần đầu phủ khoảng 145 từ, phần còn lại sang tháng 11.</p>
+    <p style="margin-top:10px;font-size:15.5px"><b>Mỗi từ khoá làm 5 bước:</b> xác định trang Google đang chọn có đúng trang mình muốn không → so với 3 kết quả đầu xem thiếu gì → bổ sung phần thiếu kèm một thứ đối thủ không có (bảng so sánh học phí, công cụ tính chi phí mở tiệm, video quy trình) → cấy 3–5 liên kết trong thân bài → đo lại sau 3 tuần.</p>
+  </div>
+
+  <div class="card">
+    <h3>Tháng 10 — chạy song song</h3>
+    <ul class="ticks">
+      <li><b>Nối trục thương mại.</b> Rà 50 bài có traffic cao nhất, mỗi bài phải có ít nhất một liên kết <b>trong thân bài</b> dẫn về khoá học liên quan. Liên kết ở menu và chân trang không tính.</li>
+      <li><b>Dựng khối đăng ký cuối mỗi bài:</b> một khoá học liên quan kèm biểu mẫu ngắn.</li>
+      <li><b>Bổ sung cho từng trang khoá học:</b> học phí, lịch khai giảng, đầu ra nghề nghiệp, ảnh học viên thật.</li>
+      <li><b>Khởi động lại sản xuất:</b> 8–10 bài mỗi tháng, chỉ nối mi và phun xăm. Không mở chủ đề mới.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>Tháng 11 — thu hoạch, và danh sách cấm</h3>
+    <p class="h3note">Tháng nhu cầu cao nhất năm. Nguyên tắc: không làm gì gây rủi ro thứ hạng.</p>
+    <div class="split">
+      <div>
+        <p style="font-weight:600;color:var(--navy);margin-bottom:8px;font-size:15.5px">Việc chính</p>
+        <ul class="ticks">
+          <li>Hoàn tất 45 từ khoá còn lại</li>
+          <li>Đo lại toàn bộ 190 từ khoá, nhóm nào đã lên hạng 4–10 thì đẩy tiếp lên top 3</li>
+          <li>Tiếp tục 8–10 bài chuyên môn lõi</li>
+          <li>Rà lại toàn bộ đường đăng ký: biểu mẫu có chạy không, số điện thoại đúng chưa</li>
+          <li>Đẩy mạnh mạng xã hội — kênh duy nhất đang tăng</li>
+        </ul>
+      </div>
+      <div>
+        <p style="font-weight:600;color:var(--down);margin-bottom:8px;font-size:15.5px">Cấm trong tháng 11</p>
+        <ul class="ticks">
+          <li>Không gỡ bài, không ẩn bài khỏi Google</li>
+          <li>Không đổi cấu trúc đường dẫn</li>
+          <li>Không nâng máy chủ nếu tháng 9 chưa làm</li>
+          <li>Không sửa hàng loạt hàng trăm bài cùng lúc</li>
+          <li>Không thử nghiệm gì mới trên trang khoá học</li>
+        </ul>
+      </div>
+    </div>
+    <div class="note bad">
+      <span class="lbl">Điểm kiểm tra giữa kỳ — 31/10</span>
+      Nếu đến cuối tháng 10 lượt bấm mỗi ngày vẫn dưới 65 và tỷ lệ vào trang khoá học dưới 5%, nghĩa là một giả định nào đó sai. <b>Phải dừng lại phân tích, không chạy tiếp theo quán tính đến tháng 12 rồi mới biết.</b>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TAB 5 ============ -->
+<section class="panel" id="p5" role="tabpanel">
+  <h2 class="sec">Tháng 12 — Củng cố và chuẩn bị 2027</h2>
+  <p class="sec-note">Nhu cầu học nghề tự rơi xuống 9,4%. Đây là cửa sổ ít thiệt hại nhất để làm việc nội bộ.</p>
+
+  <div class="card">
+    <h3>Khối nội dung hướng nghiệp và thần số học — quyết định đã điều chỉnh</h3>
+    <p class="h3note">Bản kế hoạch đầu tiên đề xuất ẩn nhóm này khỏi Google. Sau khi kiểm tra kỹ nội dung, đề xuất đó đã được rút lại.</p>
+    <div class="note ok">
+      <span class="lbl">Vì sao đổi ý</span>
+      Kiểm tra bài thần số học có traffic cao nhất cho thấy bài <b>có nối trục thật</b>: một trong năm nghề được gợi ý là kỹ thuật viên nối mi, giải thích rõ vì sao nghề này hợp với người mang số đó. Bài cũng đã từng mang về học viên đăng ký. <b>Quan trọng hơn: bài đó ra học viên trong khi chưa có một liên kết nào dẫn về trang khoá học.</b> Đây là lý do để tối ưu, không phải để gỡ.
+    </div>
+    <p style="margin-top:14px;font-size:15.5px;font-weight:600;color:var(--navy)">Hướng xử lý mới — khai thác thay vì cắt bỏ</p>
+    <table style="margin-top:8px">
+      <thead><tr><th>Việc</th><th>Chi tiết</th></tr></thead>
+      <tbody>
+        <tr><td><b>Cấy liên kết</b></td><td>13 bài thần số học hiện có <b>0 liên kết trong thân bài</b> về trang khoá học. Bổ sung 2–3 liên kết ngữ cảnh mỗi bài.</td></tr>
+        <tr><td><b>Mở rộng phần nghề thẩm mỹ</b></td><td>Mỗi bài hiện chỉ có 1 trong 5 nghề gợi ý thuộc ngành làm đẹp. Bổ sung thêm nghề chăm sóc da, phun xăm, gội đầu dưỡng sinh với lý giải phù hợp từng con số.</td></tr>
+        <tr><td><b>Thêm khối đăng ký</b></td><td>Cuối mỗi bài: khoá học tương ứng với nghề vừa gợi ý, kèm biểu mẫu ngắn.</td></tr>
+        <tr><td><b>Đo trước khi quyết tiếp</b></td><td>Sau khi có dữ liệu nguồn từ tháng 9, đo học viên đăng ký theo từng trang. Quyết định giữ hay bỏ dựa trên số thật, không dựa trên cảm nhận về mức độ liên quan.</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:14px;font-size:15.5px">Việc còn lại trong tháng 12 là <b>gộp bài trùng ý</b>: nhiều bài cùng nói một chủ đề đang tranh nhau thứ hạng. Gộp thành một bài mạnh, phần còn lại chuyển hướng. Không ẩn bài nào khỏi Google.</p>
+  </div>
+
+  <div class="card">
+    <h3>Mở kênh AI</h3>
+    <p class="h3note">Sau khi gỡ chặn kỹ thuật ở tháng 9.</p>
+    <ul class="ticks">
+      <li>Chạy công cụ đo mức độ AI nhắc tên Timona lần đầu, lấy mốc gốc <span class="who">cần danh sách tên đối thủ</span></li>
+      <li>Bổ sung dữ liệu có cấu trúc dạng hỏi đáp cho 30 bài chủ lực — giúp các công cụ AI trích dẫn</li>
+      <li>Chuẩn hoá cách viết để dễ được trích: câu trả lời trực tiếp ngay đầu bài, số liệu có nguồn, bảng so sánh</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>Chuẩn bị 2027</h3>
+    <ul class="ticks">
+      <li><b>Dựng trang trung tâm cho cụm mẹ và bé.</b> 143 bài hiện chỉ mang 3,4% lượt hiển thị vì thiếu một trang gom cụm.</li>
+      <li><b>Tổng kết 4 tháng</b>, đối chiếu với mốc gốc tháng 9.</li>
+      <li><b>Đánh giá thẳng cụm mẹ và bé:</b> sau 4 tháng nếu vẫn dưới 5% lượt hiển thị thì cần xem lại toàn bộ hướng đi — có nguy cơ lặp lại đúng cách làm đã khiến site lệch trục lần trước.</li>
+      <li><b>Chuẩn bị ứng phó đợt cập nhật Google tiếp theo</b>, nhiều khả năng rơi vào tháng 12 hoặc đầu 2027.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ TAB 6 ============ -->
+<section class="panel" id="p6" role="tabpanel">
+  <h2 class="sec">Mục tiêu và dự phóng</h2>
+  <p class="sec-note">Ba giả định: không có đợt cập nhật Google nào đánh nặng thêm, việc kỹ thuật xong trong tháng 9, và giữ được nhịp 8–10 bài mỗi tháng.</p>
+
+  <div class="card">
+    <h3>Hai chỉ số đi cùng nhau</h3>
+    <p style="font-size:15.5px;margin-bottom:14px">Thước đo là <b>số phiên trên Google Analytics</b> — tính cả người vào từ Google, vào thẳng, và vào từ mạng xã hội. Kế hoạch cam kết cả lượt truy cập lẫn lượt vào trang khoá học: chỉ nhìn một trong hai đều lệch.</p>
+    <table>
+      <thead><tr><th>Chỉ số</th><th class="num">Hiện tại 08/2026</th><th class="num">Mục tiêu 31/12/2026</th></tr></thead>
+      <tbody>
+        <tr style="background:#EAF3FB"><td><b>Lượt truy cập/tháng (Analytics)</b></td><td class="num"><b>~2.700</b></td><td class="num up"><b>7.000</b></td></tr>
+        <tr style="background:#EAF3FB"><td><b>Lượt vào trang khoá học/tháng</b></td><td class="num"><b>~57</b></td><td class="num up"><b>260–370</b></td></tr>
+        <tr><td>Lượt từ mạng xã hội/tháng</td><td class="num">709</td><td class="num">2.200–2.500</td></tr>
+        <tr><td>Từ khoá học nghề trong top 10</td><td class="num">289</td><td class="num">380–420</td></tr>
+        <tr><td>Học viên đăng ký từ Google</td><td class="num dn">không đo được</td><td class="num">đo được, có mốc</td></tr>
+      </tbody>
+    </table>
+    <div class="note ok">
+      <span class="lbl">Vì sao dòng thứ hai quan trọng hơn dòng thứ nhất</span>
+      Tháng traffic đỉnh 05/2025 site có 10.612 lượt truy cập nhưng chỉ khoảng <b>245 lượt vào trang khoá học</b>. Mục tiêu 260–370 với tổng 7.000 nghĩa là <b>nhiều học viên tiềm năng hơn thời điểm traffic cao hơn một phần ba</b>.
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>7.000 lượt truy cập đến từ đâu</h3>
+    <p class="h3note">Bốn nguồn cộng lại. Không nguồn nào cần ngân sách.</p>
+    <table>
+      <thead><tr><th>Nguồn</th><th class="num">Tháng 8</th><th class="num">Tháng 12</th><th>Cách đạt</th></tr></thead>
+      <tbody>
+        <tr><td><b>Từ Google</b></td><td class="num">~1.900</td><td class="num up">3.900–4.000</td><td>Lấy lại bài đã mất, 190 từ khoá lên trang 1, bài mới đúng chuyên môn</td></tr>
+        <tr style="background:#EAF3FB"><td><b>Từ mạng xã hội</b></td><td class="num">709</td><td class="num up">2.200–2.500</td><td><b>Đòn bẩy lớn nhất.</b> Kênh đang tự tăng 45–79% mỗi tháng mà chưa hề được đầu tư</td></tr>
+        <tr><td>Vào thẳng</td><td class="num">~320</td><td class="num">450–470</td><td>Tăng theo nhận diện thương hiệu</td></tr>
+        <tr><td>Từ trang khác dẫn sang</td><td class="num">~65</td><td class="num">120–130</td><td>Tự nhiên theo độ phủ</td></tr>
+        <tr style="background:#EAF3FB"><td><b>Tổng</b></td><td class="num"><b>~2.700</b></td><td class="num up"><b>~7.000</b></td><td></td></tr>
+      </tbody>
+    </table>
+    <div class="note bad">
+      <span class="lbl">Điều bất ngờ nhất trong bảng này</span>
+      Viết thêm bài <b>không phải</b> cách hiệu quả nhất để đạt 7.000. Tăng từ 36 lên 85 bài trong 4 tháng chỉ mang thêm khoảng <b>320 lượt truy cập</b> vào tháng 12 — vì bài mới cần 3 tháng mới lên hạng, nên chỉ bài viết trong tháng 9 và 10 mới kịp đóng góp. Cùng công sức đó dồn vào mạng xã hội mang lại <b>1.800 lượt</b>, gấp hơn năm lần.
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Dự phóng theo tháng</h3>
+    <table>
+      <thead><tr><th>Tháng</th><th class="num">Từ Google</th><th class="num">Mạng xã hội</th><th class="num">Kênh khác</th><th class="num">Tổng lượt truy cập</th><th class="num">Vào khoá học</th></tr></thead>
+      <tbody>
+        <tr><td>08/2026 — hiện tại</td><td class="num">~1.900</td><td class="num">709</td><td class="num">~385</td><td class="num">~2.700</td><td class="num">~57</td></tr>
+        <tr><td>09/2026</td><td class="num">2.000–2.270</td><td class="num">900–1.000</td><td class="num">480</td><td class="num">3.400–3.750</td><td class="num">75–85</td></tr>
+        <tr><td>10/2026</td><td class="num">2.400–2.700</td><td class="num">1.300–1.500</td><td class="num">510</td><td class="num">4.200–4.700</td><td class="num">110–150</td></tr>
+        <tr><td>11/2026</td><td class="num">3.000–3.400</td><td class="num">1.700–2.000</td><td class="num">550</td><td class="num">5.250–5.950</td><td class="num">185–240</td></tr>
+        <tr style="background:#EAF3FB"><td><b>12/2026</b></td><td class="num"><b>3.900–4.000</b></td><td class="num"><b>2.200–2.500</b></td><td class="num"><b>580</b></td><td class="num up"><b>6.700–7.100</b></td><td class="num up"><b>260–370</b></td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:12px;font-size:14.5px;color:var(--muted)">Mốc 7.000 nằm ở cận trên của tháng 12. Đạt được nếu mạng xã hội giữ được đà tăng hiện tại và nhịp viết bài duy trì từ tháng 9. Tháng 9 tăng chậm là có chủ ý — việc tối ưu cần 4–8 tuần mới vào thứ hạng.</p>
+  </div>
+
+  <div class="card">
+    <h3>Ba điều kiện để chạm 7.000</h3>
+    <table>
+      <thead><tr><th>Điều kiện</th><th>Mức cần đạt</th><th>Rủi ro nếu hụt</th></tr></thead>
+      <tbody>
+        <tr><td><b>1 · Mạng xã hội giữ đà</b></td><td>709 → 2.200–2.500 phiên/tháng</td><td class="dn">Nặng nhất. Hụt kênh này là hụt mục tiêu, không gì bù được</td></tr>
+        <tr><td><b>2 · Nhịp viết bài từ tháng 9</b></td><td>~85 bài trong 4 tháng, dồn vào tháng 9–10</td><td class="wn">Vừa. Hụt thì mất ~320 lượt</td></tr>
+        <tr><td><b>3 · Việc kỹ thuật xong trong tháng 9</b></td><td>Gỡ khung video, tải chậm ảnh, sửa dữ liệu có cấu trúc</td><td class="wn">Vừa. Ảnh hưởng gián tiếp qua thứ hạng</td></tr>
+      </tbody>
+    </table>
+    <div class="note">
+      <span class="lbl">Một lưu ý về chất lượng traffic</span>
+      Người vào từ mạng xã hội thường chỉ lướt xem, ít có ý định tìm khoá học như người chủ động tìm trên Google. Kênh này giúp đạt chỉ tiêu lượt truy cập nhưng <b>đóng góp ít vào số học viên đăng ký</b>. Đó là lý do kế hoạch giữ song song cả hai chỉ số — để tăng traffic không đánh đổi bằng việc mất học viên.
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Về mục tiêu 7.000 của tháng 8</h3>
+    <div class="note bad">
+      <span class="lbl">Số thật, tính đến 14/08</span>
+      14 ngày đầu tháng đạt <b>854 lượt bấm</b>, trung bình 61 mỗi ngày, không có dấu hiệu tăng. Giữ nguyên tốc độ thì cả tháng đạt khoảng <b>1.900</b>. Để chạm 7.000 cần 361 lượt bấm mỗi ngày trong 17 ngày còn lại — <b>gấp 5,9 lần tốc độ hiện tại</b>, tức quay lại đỉnh lịch sử của 16 tháng trong chưa đầy 3 tuần.
+    </div>
+    <p style="font-size:15.5px;margin-top:12px">Con số 7.000 được đặt trên nền của năm 2025. Nền đó đã mất từ tháng 2/2026, không phải phát sinh trong tháng 8. Đề xuất chốt lại cách đo cho quý 4 theo bảng ở trên trước khi đặt cam kết mới.</p>
+  </div>
+</section>
+
+<!-- ============ TAB 7 ============ -->
+<section class="panel" id="p7" role="tabpanel">
+  <h2 class="sec">Việc cần anh Hiếu quyết</h2>
+  <p class="sec-note">Sáu quyết định, xếp theo mức độ chặn công việc. Mỗi mục ghi rõ nếu chưa quyết thì việc gì bị đứng.</p>
+
+  <div class="dec">
+    <div class="dec-top"><span class="dec-t">1. Rủi ro pháp lý trong nội dung quảng bá</span><span class="dec-d">GẤP</span></div>
+    <div class="dec-b">Trang đang dùng các cụm "chuẩn Y khoa số 1 Việt Nam", "đối tác duy nhất", "25 bệnh viện hàng đầu". Khoản 11 Điều 8 Luật Quảng cáo 2012 cấm dùng "nhất", "duy nhất", "số một" khi không có tài liệu hợp pháp chứng minh.</div>
+    <div class="dec-blk">Đây là rủi ro pháp lý, không phải vấn đề SEO. Cần quyết định giữ kèm tài liệu chứng minh, hay đổi cách diễn đạt.</div>
+  </div>
+
+  <div class="dec">
+    <div class="dec-top"><span class="dec-t">2. Ngân sách kỹ thuật</span><span class="dec-d">TRƯỚC 05/09</span></div>
+    <div class="dec-b">Gỡ khung video trang chủ, bật tải chậm ảnh, sửa dữ liệu có cấu trúc, mở chặn công cụ AI, nâng phiên bản máy chủ.</div>
+    <div class="dec-blk">Chặn: toàn bộ nhóm việc kỹ thuật của tháng 9. Chưa có ngân sách thì phần tốc độ trang không xử lý được, mà đây là tiêu chí Google đã siết từ tháng 3/2026.</div>
+  </div>
+
+  <div class="dec">
+    <div class="dec-top"><span class="dec-t">3. Đổi cách đo cho quý 4</span><span class="dec-d">TRƯỚC 15/09</span></div>
+    <div class="dec-b">Chuyển từ tổng lượt truy cập sang <b>lượt bấm vào trang khoá học</b> cộng <b>học viên đăng ký từ Google</b>.</div>
+    <div class="dec-blk">Chặn: cách báo cáo cả quý. Nếu vẫn đo bằng tổng lượt truy cập thì kế hoạch này sẽ bị chấm là thất bại dù mang về nhiều học viên hơn.</div>
+  </div>
+
+  <div class="dec">
+    <div class="dec-top"><span class="dec-t">4. Người duyệt chuyên môn cho nội dung mẹ và bé</span><span class="dec-d">TRƯỚC 30/09</span></div>
+    <div class="dec-b">Có bố trí người có chuyên môn y tế duyệt nội dung không? Nếu không, cần thu hẹp phạm vi các bài liên quan sức khoẻ thai kỳ.</div>
+    <div class="dec-blk">Chặn: hướng đi của cụm mẹ và bé. Google đánh giá rất nặng nội dung sức khoẻ không có người chuyên môn đứng tên.</div>
+  </div>
+
+  <div class="dec">
+    <div class="dec-top"><span class="dec-t">5. Tám nhóm từ khoá mới của cụm mẹ và bé</span><span class="dec-d">TRƯỚC 30/09</span></div>
+    <div class="dec-b">Duyệt để viết tiếp, hay hoãn sang 2027 để dồn lực cho nối mi và phun xăm trong quý 4?</div>
+    <div class="dec-blk">Đề xuất của bộ phận SEO: hoãn. Cụm mẹ và bé sau 143 bài mới chiếm 3,4% lượt hiển thị, trong khi nối mi và phun xăm có nhu cầu gấp nhiều lần và đúng mùa quý 4.</div>
+  </div>
+
+  <div class="dec">
+    <div class="dec-top"><span class="dec-t">6. Nhân sự cho mạng xã hội và viết bài</span><span class="dec-d">TRƯỚC 30/09</span></div>
+    <div class="dec-b">Kế hoạch cần đẩy mạng xã hội từ 709 lên 2.200–2.500 phiên mỗi tháng, và giữ nhịp viết bài dồn vào tháng 9–10.</div>
+    <div class="dec-blk">Chặn: mục tiêu 7.000. Mạng xã hội là điều kiện quan trọng nhất — hụt kênh này thì không gì bù được. Kế hoạch không cần ngân sách quảng cáo, nhưng cần người làm.</div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <b>Nguồn số liệu:</b> Google Search Console (đến 14/08/2026) · Google Analytics 4 · Kiểm tra kỹ thuật trực tiếp ngày 19/08/2026 · Bảng từ khoá 1.357 mục<br>
+    <b>Thước đo chuẩn:</b> lượt bấm từ Google Search Console — không dùng số ước lượng của công cụ bên thứ ba · Lập ngày 19/08/2026
+  </div>
+</footer>
+
+<script>
+(function(){
+  var tabs=[].slice.call(document.querySelectorAll('.tab'));
+  var panels=[].slice.call(document.querySelectorAll('.panel'));
+  function show(id){
+    tabs.forEach(function(t){t.setAttribute('aria-selected', t.dataset.p===id ? 'true':'false');});
+    panels.forEach(function(p){p.classList.toggle('on', p.id===id);});
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  tabs.forEach(function(t){
+    t.addEventListener('click',function(){show(t.dataset.p);});
+    t.addEventListener('keydown',function(e){
+      var i=tabs.indexOf(t);
+      if(e.key==='ArrowRight'){e.preventDefault();tabs[(i+1)%tabs.length].focus();tabs[(i+1)%tabs.length].click();}
+      if(e.key==='ArrowLeft'){e.preventDefault();tabs[(i-1+tabs.length)%tabs.length].focus();tabs[(i-1+tabs.length)%tabs.length].click();}
+    });
+  });
+})();
+</script>
+</body>
+</html>
